@@ -9,31 +9,44 @@ class Page extends React.Component{
 
   render(){
     
-    const bookFind = this.props.stateIs.books.map((item, idx) => {
-      return ( 
-        
-        item = 
-        <div 
-        className= 'thePage'
-        key={idx}
-        >
-        {this.props.stateIs.title}
-        {this.props.stateIs.author}
-        {this.props.stateIs.desc}
-        {this.props.stateIs.price}
+     const list = this.props.stateIs.map((item) => {
+     
+      
 
-      </div>
-      )
-    })
 
-    
+      if (item.saleInfo.saleability === "NOT_FOR_SALE" ||item.saleInfo.saleability === "FREE"){
+
+      return <li key ={item.id}>
+      <h2>{item.volumeInfo.title}</h2>
+      <img src={item.volumeInfo.imageLinks.smallThumbnail} />
+      <h3>{item.volumeInfo.authors}</h3>
+      <p>This item is: {item.saleInfo.saleability}</p>
+      {item.volumeInfo.description}   
+      </li>
+
+
+     } else if (item.saleInfo.saleability === "FOR_SALE") {
+      return <li key ={item.id}>
+      <h2>{item.volumeInfo.title}</h2>
+      <img src={item.volumeInfo.imageLinks.smallThumbnail} />
+      <h3>{item.volumeInfo.authors}</h3>
+      <p>{item.saleInfo.listPrice.amount}</p>
+      {item.volumeInfo.description}   
+      </li>
+
+
+     }
+     
+     
+
+         
+     })    
     
     return (
       <div className= 'thePage'>
-        {this.props.stateIs.title}
-        {this.props.stateIs.author}
-        {this.props.stateIs.desc}
-        {this.props.stateIs.price}
+        <ul>
+        {list}
+        </ul>
 
       </div>
     )

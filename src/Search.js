@@ -14,9 +14,12 @@ class Search extends React.Component{
         <input 
         name='book' 
         id='book'
+        value={this.props.stateText}
+        onChange={e => this.props.getsText(e.currentTarget)}
         >
         </input>
         <button
+          htmlFor='book'
           type='button'
           className='search-button'
           onClick={() => this.props.searchBar()}

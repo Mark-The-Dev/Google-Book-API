@@ -11,7 +11,11 @@ class Filter extends React.Component {
     return (
       <div className='filterSection'>
         <label htmlFor='bType'>Book Type:</label>
-        <select id ='bType' name='bType'>
+        <select
+         id ='bType' 
+         name='bType'
+         onChange={(e) => this.props.bType(e.currentTarget)}
+         >
         <option value='all'>All</option>
         <option value='books'>Books</option>
         <option value='magazines'>Magazines</option>
@@ -21,8 +25,10 @@ class Filter extends React.Component {
        
        
         <label htmlFor='pType'>Print Type:</label>
-        <select id ='pType' name='pType'>
-        <option>No Filter</option>
+        <select id ='pType' name='pType'
+        onChange={(e) => this.props.pType(e.currentTarget)}
+        >
+        <option value='none'>No Filter</option>
         <option value='partial'>Partial</option>
         <option value='full'>Full</option>
         <option value='free-ebooks'>Free E-books</option>
