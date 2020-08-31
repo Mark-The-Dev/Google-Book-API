@@ -20,21 +20,80 @@ Standard call goes: link searchterm (&printType= || &filter=) key=
 
 */
 
-class App extends React.Component{
+
+
+class App extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      books: [
+        {
+          title: '',
+          desc: '',
+          author: '',
+          image: '',
+          price: ''
+        }
+      ]
+  
+  
+    }
+  }
+  
+  
+  
+
+
+  componentDidMount() {
+    let url = `https://www.googleapis.com/books/v1/volumes?q=flowers`
+    let apiKey = 'key=AIzaSyCZii6WHPmqDLov4E3g0G0qT11L-8a4Zq4'
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
 
 
 
-  render(){
+        console.log(data)
+        this.setState({
+          books:[
+            {
+              title: data.items.volumeInfo.title,
+              desc: data.items.volumeInfo.subtitle,
+              author: data.items.volumeInfo.authors,
+              price: data.items.saleInfo.listPrice.amount
+            }
+          ]})
+      })
 
+
+  }
+
+
+  handleAdd() {
+    console.log('hi')
+
+
+  }
+
+
+  render() {
+
+    
     return (
-      <div className = 'App'>
+      <div className='App'>
 
-      <Title />
-      <form>
-        <Search />
-        <Filter/>
-      </form>
-      <Page />
+        <Title />
+        <form>
+          <Search
+            searchBar={this.handleAdd}
+          />
+          <Filter />
+        </form>
+        <Page
+          stateIs={this.state}
+        />
       </div>
     )
 
